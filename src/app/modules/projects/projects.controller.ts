@@ -1,24 +1,18 @@
 import { Request, Response } from 'express';
 import { ProjectModel } from './projects.model';
-import { Project } from './projects.interface';
+import { IProject } from './projects.interface';
 
-// Create a new project
 const createProject = async (req: Request, res: Response) => {
     try {
-        const projectData: Project = req.body;
+        const projectData: IProject = req.body;
         
         // Validate required fields
-        if (!projectData.img || !projectData.name || !projectData.category || !projectData.LiveLink) {
+        if (!projectData.image || !projectData.name || !projectData.category || !projectData.liveLink) {
             return res.status(400).json({
                 success: false,
                 message: 'Missing required fields',
-                requiredFields: ['img', 'name', 'category', 'LiveLink']
+                requiredFields: ['image', 'name', 'category', 'liveLink']
             });
-        }
-
-        // Ensure technology is an array
-        if (!Array.isArray(projectData.technology)) {
-            projectData.technology = [projectData.technology];
         }
 
         const result = await ProjectModel.create(projectData);
@@ -37,7 +31,6 @@ const createProject = async (req: Request, res: Response) => {
     }
 };
 
-// Get all projects
 const getAllProjects = async (req: Request, res: Response) => {
     try {
         const result = await ProjectModel.find();
@@ -47,18 +40,16 @@ const getAllProjects = async (req: Request, res: Response) => {
             data: result
         });
     } catch (error) {
+        console.error('Error retrieving projects:', error);
         res.status(500).json({
             success: false,
             message: 'Failed to retrieve projects',
-            error: error
+            error: error instanceof Error ? error.message : 'Unknown error occurred'
         });
     }
 };
 
-
-
 export const ProjectController = {
     createProject,
-    getAllProjects,
- 
+    getAllProjects
 };
