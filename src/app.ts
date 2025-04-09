@@ -8,7 +8,7 @@ const app = express()
 // parsers
 app.use(express.json());
 app.use(cors({
-  origin: 'http://localhost:5174',
+  origin: 'https://jihad-portfolio.vercel.app',
   credentials: true,
 }));
 
