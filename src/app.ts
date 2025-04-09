@@ -8,8 +8,9 @@ const app = express()
 // parsers
 app.use(express.json());
 app.use(cors({
-  origin: 'https://jihad-portfolio.vercel.app',
-  credentials: true,
+  origin: ['https://jihad-portfolio.vercel.app'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true
 }));
 
 app.use('/api/v1/projects', ProjectRoutes);
