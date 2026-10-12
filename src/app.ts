@@ -4,7 +4,7 @@ import { ProjectRoutes } from './app/modules/projects/projects.route';
 import { AdminRoutes } from './app/modules/admin/admin.route';
 
 const app = express();
-
+// erew
 const allowedOrigins = [
   'http://localhost:5173',
   'https://all-projects-web-development-backend.vercel.app',
